@@ -1,23 +1,30 @@
 ##简介
-这是一个本人的学习项目,所以会不断改进集成优秀的东西.很多不是很必要的,选取适用的,尽量会注释完整方便大家一起交流学习.一些东西是基本使用，需要深入再对兴趣点深入。后面会加工作流activity(简单使用实现游客发表博客，管理员审核通过。。强行使用啊- -),项目较小还没想好怎么用MQ,或者kafka. 后面可能会改成dubbo项目结合zoonkeeper.
+这是一个本人的学习项目,所以会不断改进集成优秀的东西，但也有为了学习和分享强行融入进来的。
+我会尽量注释完整方便大家一起交流学习。
+大多数东西是基本使用，需要深入再根据需求自行了解。
+###理想计划
+	后面会加工作流activity(简单使用实现游客发表博客，管理员审核通过。强行使用啊- -),项目较小还没想好怎么用MQ,或者kafka。
+	后面可能会改成dubbo形式项目结合zoonkeeper。
 ##后端
 * `框架`：Spring+SpringMvc+MyBatis
 * `项目构建工具`：Maven
 * `连接池`：Druid,集成监控，访问MyBlog/druid
 * `异常统一管理`：@ControllerAdvice 新特性，详情见exception包
-* `缓存管理`：Spring集成Redis,需要安装Redis,并修改配置文件.现在是注解使用,不灵活.可以用util包下的工具类
-* `简洁代码`：lombok注解声明Bean,简化代码.需要找到Jar包双击安装. 
+* `缓存管理`：Spring集成Redis,需要安装Redis,并修改配置文件。现在是注解使用,不灵活。可以用util包下的工具类
+* `简洁代码`：lombok注解声明Bean,简化代码。需要找到Jar包双击安装。 
 * `Api查看`：集成Swagger, 访问MyBlog/api查看所有Api
 * `项目管理`：github,可以使用Egit
 * `MyBatis分页`：pageHelper
 * `基本CRUD`：mybatis-plus,基本的CRUD操作
 * `全文检索`：lucene5+中文分词+高亮,注释完整
-* `shiro`：权限管理。  还没开始用哦，等我看完开涛哥的博客。
+* `shiro`：权限管理。  还没开始用哦,等我看完开涛哥的博客
+* `验证码`：kcaptcha
+
  
 ##前端
 * `基本布局`：Bootstrap
 * `前台`：AngularJs+路由  `后台`：EasyUi
-* `jquey`：2.x 
+* `jquey`：2。x 
 * `兼容html5`：html5shiv
 * `表单验证`：bootstrapValidator
 * `分页`：kkPager
@@ -32,9 +39,9 @@
 ##感激
 感谢以下的项目,排名不分先后
 
-* [java1234](http://www.java1234.com/) 主要的代码参考者,本项目在其之上集成改进
-* [pageHelper](https://github.com/pagehelper/Mybatis-PageHelper) 分页插件,拦截器.
-* [mybatis-plus](http://git.oschina.net/juapk/mybatis-plus) 基本CRUD,简化使用.也带了分页拦截器.（本项目没有使用，习惯了上一个）
+* [java1234](http://www.java1234。com/) 主要的代码参考者,本项目在其之上集成改进
+* [pageHelper](https://github.com/pagehelper/Mybatis-PageHelper) 分页插件,拦截器。
+* [mybatis-plus](http://git.oschina.net/juapk/mybatis-plus) 基本CRUD,简化使用。也带了分页拦截器。（本项目没有使用，习惯了上一个）
 
 ##关于作者
 

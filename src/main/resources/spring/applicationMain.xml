@@ -20,6 +20,7 @@
 	<import resource="redis-spring.xml" />
 	<import resource="aop-spring.xml" />
 	<import resource="jdbc-spring.xml" />
+	<import resource="beans-spring.xml" />
 	<!-- <import resource="shiro-spring.xml" /> -->
 
 </beans>
