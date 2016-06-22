@@ -46,7 +46,7 @@ import com.java.blog.exception.IndexWriterCloseException;
 import lombok.extern.log4j.Log4j;
 
 /**@author TaoYu
- * @Description LUCENE工具类，不支持并发
+ * @Description LUCENE工具类，不支持并发(后面会改成按登录用户写地址，写入对应的路径，即可支持多人操作)
  */
 @Log4j
 public class LuceneUtil {

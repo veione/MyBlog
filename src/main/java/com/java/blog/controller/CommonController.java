@@ -8,13 +8,22 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jeecgframework.poi.excel.entity.ExportParams;
+import org.jeecgframework.poi.excel.entity.vo.NormalExcelConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.github.pagehelper.PageInfo;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.java.blog.entity.Blog;
+import com.java.blog.exception.ParamException;
+import com.java.blog.service.BlogService;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -28,6 +37,19 @@ import springfox.documentation.annotations.ApiIgnore;
 public class CommonController {
 	@Autowired
 	private Producer captchaProducer = null;
+	@Autowired
+	private BlogService blogService;
+
+	@ApiOperation(value = "测试下载Excel", notes = "", response = Blog.class)
+	@RequestMapping(value = "/excel")
+	public String excel(ModelMap map) throws ParamException, IOException {
+		PageInfo<Blog> pageInfo = this.blogService.findByPage(1, 5);
+		map.put(NormalExcelConstants.FILE_NAME, "我的博客");
+		map.put(NormalExcelConstants.CLASS, Blog.class);
+		map.put(NormalExcelConstants.PARAMS, new ExportParams("我的博客", "XX公司"));
+		map.put(NormalExcelConstants.DATA_LIST, pageInfo.getList());
+		return NormalExcelConstants.JEECG_EXCEL_VIEW;
+	}
 
 	/**@throws IOException 
 	 * @Describe：生成验证码
