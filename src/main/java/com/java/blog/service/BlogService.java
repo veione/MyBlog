@@ -8,6 +8,8 @@ public interface BlogService extends ISuperService<Blog>  {
 
 
 	PageInfo<Blog> findByPage(Integer pageNum, Integer pageSize);
+
+	PageInfo<Blog> findByPageAndType(Integer pageNum, Integer pageSize, Integer id);
 	
 
 }

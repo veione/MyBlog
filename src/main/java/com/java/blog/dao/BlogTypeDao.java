@@ -1,5 +1,8 @@
 package com.java.blog.dao;
 
-public interface BlogTypeDao {
+import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.java.blog.entity.BlogType;
+
+public interface BlogTypeDao  extends AutoMapper<BlogType>  {
 
 }

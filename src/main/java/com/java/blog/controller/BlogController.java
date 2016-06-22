@@ -3,6 +3,7 @@ package com.java.blog.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +31,8 @@ public class BlogController {
 	private BlogService blogService;
 
 	@ApiOperation(value = "博客首页", notes = "分页查找带缓存打开@Cacheable", response = Blog.class)
-	@RequestMapping(value = "/blogs", method = RequestMethod.GET)
-	public ResponseJson blogs(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize)
+	@RequestMapping(value = "/articles", method = RequestMethod.GET)
+	public ResponseJson articles(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize)
 			throws ParamException {
 		ResponseJson json = new ResponseJson();
 		PageInfo<Blog> pageInfo = this.blogService.findByPage(pageNum, pageSize);
@@ -39,7 +40,17 @@ public class BlogController {
 		return json;
 	}
 
-	@ApiOperation(value = "全文检索", notes = "根据现有数据写索引", response = ResponseJson.class)
+	@ApiOperation(value = "根据类型查找", notes = "分页查找", response = Blog.class)
+	@RequestMapping(value = "/articles/type/{id}", method = RequestMethod.GET)
+	public ResponseJson articlesByType(@PathVariable("id") Integer id, @RequestParam("pageNum") Integer pageNum,
+			@RequestParam("pageSize") Integer pageSize) throws ParamException {
+		ResponseJson json = new ResponseJson();
+		PageInfo<Blog> pageInfo = this.blogService.findByPageAndType(pageNum, pageSize, id);
+		json.setPage(pageInfo);
+		return json;
+	}
+
+	@ApiOperation(value = "全文检索", notes = "根据现有数据读索引", response = ResponseJson.class)
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public ResponseJson search(@RequestParam String info) throws Exception {
 		ResponseJson json = new ResponseJson();

@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.java.blog.dao.BlogDao;
+import com.java.blog.dao.BlogTypeDao;
 import com.java.blog.entity.Blog;
 import com.java.blog.service.BlogService;
 
@@ -25,6 +26,17 @@ public class BlogServiceImpl extends SuperServiceImpl<BlogDao, Blog> implements 
 	public PageInfo<Blog> findByPage(Integer pageNum, Integer pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		List<Blog> list = blogDao.selectList(new EntityWrapper<Blog>(null));
+		PageInfo<Blog> pageInfo = new PageInfo<>(list);
+		return pageInfo;
+	}
+
+
+	@Override
+	public PageInfo<Blog> findByPageAndType(Integer pageNum, Integer pageSize, Integer id) {
+		PageHelper.startPage(pageNum, pageSize);
+		Blog blog = new Blog();
+		blog.setTypeId(id);
+		List<Blog> list = blogDao.selectList(new EntityWrapper<Blog>(blog));
 		PageInfo<Blog> pageInfo = new PageInfo<>(list);
 		return pageInfo;
 	}

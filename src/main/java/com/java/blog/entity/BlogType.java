@@ -2,19 +2,35 @@ package com.java.blog.entity;
 
 import java.io.Serializable;
 
-import lombok.Data;
+import com.baomidou.mybatisplus.annotations.IdType;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 
-@Data
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@ApiModel("类型")
+@TableName("blogtype")
 public class BlogType implements Serializable {
 
-	private static final long serialVersionUID = 2957126148318018214L;
+	@TableField(exist = false)
+	private static final long serialVersionUID = 1L;
 
-	private Integer id; // 编号
+	@TableId(type = IdType.AUTO)
+	@ApiModelProperty("主键")
+	private Integer id;
 
-	private String typeName; // 博客类型名称
+	@ApiModelProperty("博客类型名称键")
+	private String name;
 
-	private Integer blogCount; // 数量
-
-	private Integer orderNo; // 排序 从小到大排序显示
+	@ApiModelProperty("排序")
+	private Integer sort;
 
 }

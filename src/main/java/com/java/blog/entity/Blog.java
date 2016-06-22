@@ -51,9 +51,8 @@ public class Blog implements Serializable {
 	@ApiModelProperty("回复次数")
 	private Integer replyHit;
 
-	@TableField(exist = false)
 	@ApiModelProperty("博客类型")
-	private BlogType blogType;
+	private Integer typeId;
 
 	public Blog(Integer id, String title, Date releaseDate, String content) {
 		super();

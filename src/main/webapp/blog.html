@@ -23,7 +23,6 @@
 <script src="js/bootstrapValidator.min.js" type="text/javascript"
 	charset="utf-8"></script>
 <body ng-app="myApp" style="padding: 50px;">
-	<div class="container" ng-controller="myCtrl">
 		<header>
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container">
@@ -59,43 +58,10 @@
 				</div>
 			</nav>
 		</header>
-		<div class="modal fade " id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true"></button>
-						<h4 class="modal-title" id="myModalLabel">用户登录</h4>
-					</div>
-					<div class="modal-body">
-						<form role="form" id="myForm" class="form-horizontal">
-							<div class="form-group form-group-lg">
-								<label for="username" class="control-label ">用户名</label> <input
-									type="text" class="form-control col-lg-5" name="username"
-									id="username" />
-							</div>
-							<div class="form-group form-group-lg">
-								<label for="password" class="control-label">密码</label> <input
-									type="password" class="form-control" name="password"
-									id="password" />
-							</div>
-							<div class="checkbox">
-								<label><input type="checkbox"> 记住我</label>
-							</div>
-							<button type="submit" class="btn btn-primary">提交更改</button>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+	<div class="container" ng-controller="myCtrl">
+		<div class="middele">
+			<div class="row">
+			<div class="col-md-10 ">
 				<ul class="list-group" ng-repeat="blog in blogs">
 					<li class="list-group-item"><a href="">{{blog.title}}</a></li>
 					<li class="list-group-item"><span>{{blog.summary}}</span></li>
@@ -104,7 +70,14 @@
 				</ul>
 				<div id="kkpager"></div>
 			</div>
+			<div class="col-md-2">
+				<ul class="list-group" ng-repeat="type in types">
+					<li class="list-group-item"><a href="javascript:void(0);" ng-click="findByType({{type.id}})">{{type.name}}</a></li>
+				</ul>
+			</div>
 		</div>
+		</div>
+	
 	</div>
 </body>
 <script src="js/myApp/blog.js" type="text/javascript" charset="utf-8"></script>
