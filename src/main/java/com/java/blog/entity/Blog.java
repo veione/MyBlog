@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecgframework.poi.excel.annotation.ExcelEntity;
-import org.jeecgframework.poi.excel.annotation.ExcelIgnore;
 import org.jeecgframework.poi.excel.annotation.ExcelTarget;
 
 import com.baomidou.mybatisplus.annotations.IdType;

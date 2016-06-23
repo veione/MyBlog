@@ -23,6 +23,7 @@
 	<import resource="jdbc-spring.xml" />
 	<import resource="beans-spring.xml" />
 	<!-- <import resource="shiro-spring.xml" /> -->
+	
 	<!-- 注解式 -->
 	<task:annotation-driven />
 </beans>

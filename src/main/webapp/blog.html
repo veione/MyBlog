@@ -71,8 +71,8 @@
 				<div id="kkpager"></div>
 			</div>
 			<div class="col-md-2">
-				<ul class="list-group" ng-repeat="type in types">
-					<li class="list-group-item"><a href="javascript:void(0);" ng-click="findByType({{type.id}})">{{type.name}}</a></li>
+				<ul class="list-group" >
+					<li class="list-group-item list-group-item-info" ng-repeat="type in types"><a href="javascript:void(0);" ng-click="findByType(type.id)">{{type.name}}</a></li>
 				</ul>
 			</div>
 		</div>
@@ -84,29 +84,7 @@
 
 
 <script type="text/javascript">
-	//生成分页控件
-	function getPage(page, $scope, $http) {
-		kkpager.generPageHtml({
-			pno : page.pageNum,
-			mode : 'click',
-			//总页码  
-			total : page.totalPage,
-			//总数据条数  
-			totalRecords : page.totalRecords,
-			click : function(n) {
-				$http({
-					url : 'blog/blogs?pageNum=' + n + '&pageSize=5',
-					method : 'GET'
-				}).success(function(data) {
-					console.log(data)
-					$scope.blogs = data.page.results;
-				}).error(function(data) {
-					alert(data.msg)
-				});
-				this.selectPage(n);
-			}
-		});
-	}
+
 	/*表单验证  */
 	$(function() {
 		$('#myForm').bootstrapValidator({

@@ -18,7 +18,7 @@ angular.module("myApp", []).controller("myCtrl", function($scope, $http) {
 		}).success(function(data) {
 			console.log(data)
 			$scope.blogs = data.page.results;
-			getPage(data.page, $scope, $http);
+			$scope.getPage(data.page);
 		}).error(function(data) {
 			alert(data.msg)
 		});
@@ -29,12 +29,12 @@ angular.module("myApp", []).controller("myCtrl", function($scope, $http) {
 	}).success(function(data) {
 		console.log(data)
 		$scope.blogs = data.page.results;
-		getPage(data.page, $scope, $http);
+		$scope.getPage(data.page, $scope, $http);
 	}).error(function(data) {
 		alert(data.msg)
 	});
 	$http({
-		url : 'blogTypes/all',
+		url : 'blogType/all',
 		method : 'GET'
 	}).success(function(data) {
 		console.log(data)
@@ -42,4 +42,29 @@ angular.module("myApp", []).controller("myCtrl", function($scope, $http) {
 	}).error(function(data) {
 		alert(data.msg)
 	});
+	
+	//生成分页控件
+	$scope.getPage=function (page) {
+		console.log(page)
+		kkpager.generPageHtml({
+			pno : page.pageNum,
+			mode : 'click',
+			//总页码  
+			total : page.totalPage,
+			//总数据条数  
+			totalRecords : page.totalRecords,
+			click : function(n) {
+				$http({
+					url : 'blog/articles?pageNum=' + n + '&pageSize=5',
+					method : 'GET'
+				}).success(function(data) {
+					console.log(data)
+					$scope.blogs = data.page.results;
+				}).error(function(data) {
+					alert(data.msg)
+				});
+				this.selectPage(n);
+			}
+		},true);
+	}
 });
