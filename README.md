@@ -25,6 +25,7 @@
 ##前端
 * `基本布局`：Bootstrap
 * `前台`：AngularJs+路由  `后台`：EasyUi
+* `requireJs`：按需引入包
 * `jquey`：2.x 
 * `兼容html5`：html5shiv
 * `表单验证`：bootstrapValidator
