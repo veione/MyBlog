@@ -27,7 +27,7 @@ public class BlogTypeController {
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseJson all() throws ParamException {
 		ResponseJson json = new ResponseJson();
-		List<BlogType> types = blogTypeService.selectList(new BlogType());
+		List<BlogType> types = blogTypeService.getAllBlogTypes();
 		json.setResults(types);
 		return json;
 	}

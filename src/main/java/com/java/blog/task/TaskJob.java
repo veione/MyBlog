@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 @Component("taskJob")
 public class TaskJob {
+	
+	private Integer times=0;
 	/**
 	 * CRON表达式    含义 
 	"0 0 12 * * ?"    每天中午十二点触发 
@@ -17,11 +19,11 @@ public class TaskJob {
 	"0 0/5 14,18 * * ?"    每天的下午2点至2：55和6点至6点55分两个时间段内每5分钟一次触发 
 	"0 0-5 14 * * ?"    每天14:00至14:05每分钟一次触发 
 	"0 10,44 14 ? 3 WED"    三月的每周三的14：10和14：44触发 
-	"0 15 10 ? * MON-FRI"    每个周一、周二、周三、周四、周五的10：15触发 
+	"0 15 10 ? * MON-FRI" 每个周一、周二、周三、周四、周五的10：15触发
 	 */
-	@Scheduled(cron = "*/5 * * * * ?")//每隔5秒执行一次
-    public void test() throws Exception {
-//        System.out.println("Test is working......");
-    }
+	@Scheduled(cron = "*/5 * * * * ?") // 每隔5秒执行一次
+	public void test() throws Exception {
+//		System.out.println("定时任务开启，当前执行" + (times++) + "次");
+	}
 
 }

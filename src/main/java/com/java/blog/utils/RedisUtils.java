@@ -17,7 +17,6 @@ public class RedisUtils {
 		Properties p = PropertiesUtil.getProperties("common.properties");
 		password = p.getProperty("redis.pass");
 		timeout = Integer.parseInt(p.get("redis.timeout").toString());
-
 		JedisPoolConfig config = new JedisPoolConfig();
 		config.setTestOnBorrow(false);
 		config.setBlockWhenExhausted(true);

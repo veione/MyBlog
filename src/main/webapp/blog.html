@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="">
-
 <head>
 <meta charset="UTF-8" />
 <meta name="description" content="" />
@@ -9,130 +8,70 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title></title>
 </head>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="css/bootstrapValidator.min.css" />
-<link rel="stylesheet" type="text/css" href="css/kkpager_orange.css" />
-<link rel="stylesheet" type="text/css" href="css/base.css" />
-<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/jquery-2.2.4.min.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="js/html5shiv.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/kkpager.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/bootstrapValidator.min.js" type="text/javascript"
-	charset="utf-8"></script>
-<body ng-app="myApp" style="padding: 50px;" ng-controller="MainCtrl">
-		<header>
-			<nav class="navbar navbar-inverse navbar-fixed-top">
-				<div class="container" >
-					<div class="navbar-header">
-						<button type="button" class="collapsed navbar-toggle"
-							data-toggle="collapse" data-target="#taoyu">
-							<span class="sr-only">切换导航</span> <span class="icon-bar"></span>
-							<span class="icon-bar"></span> <span class="icon-bar"></span>
-						</button>
-						<a class=" navbar-brand" href="index.html">首页</a>
+<link rel="stylesheet" type="text/css" href="static/base/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="static/base/css/bootstrapValidator.min.css" />
+<link rel="stylesheet" type="text/css" href="static/base/css/kkpager_orange.css" />
+<link rel="stylesheet" type="text/css" href="static/app/css/base.css" />
+<body  style="padding: 50px;" ng-controller="MainCtrl">
+	<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="collapsed navbar-toggle"
+						data-toggle="collapse" data-target="#taoyu">
+						<span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span>
+					</button>
+					<a class=" navbar-brand" href="index.html">首页</a>
 
-					</div>
-					<div class="collapse navbar-collapse" id="taoyu">
-						<ul class="nav navbar-nav">
-							<li><a href="blog.html" class="active">博客</a></li>
-							<li><a href="">心情</a></li>
-							<li><a href="">个人介绍</a></li>
-						</ul>
-						<form class="navbar-form navbar-left hidden-xs" role="search">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="全文检索" ng-model="info" />
-							</div>
-							<button type="button" class="btn btn-default" ng-click="searchBlog()">
-								<span class="glyphicon glyphicon-search" ></span>
-							</button>
-						</form>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#" class="btn" data-toggle="modal"
-								data-target="#myModal">登录</a></li>
-							<li><a href="#">注册</a></li>
-						</ul>
-					</div>
 				</div>
-			</nav>
-		</header>
+				<div class="collapse navbar-collapse" id="taoyu">
+					<ul class="nav navbar-nav">
+						<li><a href="blog.html" class="active">博客</a></li>
+						<li><a href="">心情</a></li>
+						<li><a href="">个人介绍</a></li>
+					</ul>
+					<form class="navbar-form navbar-left hidden-xs" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="全文检索"
+								ng-model="info" />
+						</div>
+						<button type="button" class="btn btn-default"
+							ng-click="searchBlog()">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#" class="btn" data-toggle="modal"
+							data-target="#myModal">登录</a></li>
+						<li><a href="#">注册</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
 	<div class="container" ng-controller="BlogCtrl">
 		<div class="middele">
 			<div class="row">
-			<div class="col-md-10 ">
-				<ul class="list-group" ng-repeat="blog in blogs">
-					<li class="list-group-item"><a href="">{{blog.title}}</a></li>
-					<li class="list-group-item"><span>{{blog.summary}}</span></li>
-					<li class="list-group-item"><mark>发布于：</mark>{{blog.releaseDate}}<small>阅读（
-							{{blog.clickHit}} ） 评论（ {{blog.replyHit}} ）</small></li>
-				</ul>
-				<div id="kkpager"></div>
-			</div>
-			<div class="col-md-2">
-				<ul class="nav nav-pills" >
-					<li class="" ng-repeat="type in types"><a href="javascript:void(0);" ng-click="findByType(type.id)">{{type.name}}</a></li>
-				</ul>
+				<div class="col-md-10 ">
+					<ul class="list-group" ng-repeat="blog in blogs">
+						<li class="list-group-item"><a href="" ng-bind="blog.title"></a></li>
+						<li class="list-group-item"><span ng-bind="blog.summary"></span></li>
+						<li class="list-group-item"><mark>发布于：</mark ><span ng-bind="blog.releaseDate"></span><small>阅读（
+								<span ng-bind="blog.clickHit"></span> ） 评论（<span ng-bind="blog.replyHit"></span>）</small></li>
+					</ul>
+					<div id="kkpager"></div>
+				</div>
+				<div class="col-md-2">
+					<ul class="nav nav-pills">
+						<li class="" ng-repeat="type in types"><a
+							href="javascript:void(0);" ng-click="findByType(type.id)"  ng-bind="type.name"></a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		</div>
-	
 	</div>
 </body>
-<script src="js/myApp/blog.js" type="text/javascript" charset="utf-8"></script>
-
-
-<script type="text/javascript">
-
-	/*表单验证  */
-	$(function() {
-		$('#myForm').bootstrapValidator({
-			message : 'This value is not valid',
-			feedbackIcons : {
-				valid : 'glyphicon glyphicon-ok',
-				invalid : 'glyphicon glyphicon-remove',
-				validating : 'glyphicon glyphicon-refresh'
-			},
-			fields : {
-				username : {
-					message : '用户名必填',
-					validators : {
-						notEmpty : {
-							message : '用户名不能为空'
-						},
-						stringLength : {
-							min : 6,
-							max : 30,
-							message : '用户名在6到三十位之间'
-						},
-						regexp : {
-							regexp : /^[a-zA-Z0-9_\.]+$/,
-							message : '用户名必须在字母数字和下划线之间'
-						}
-					}
-				},
-				password : {
-					validators : {
-						notEmpty : {
-							message : '密码不能为空'
-						}
-					}
-				}
-			}
-		}).on('success.form.bv', function(e) {
-			// Prevent form submission
-			e.preventDefault();
-			// Get the form instance
-			var $form = $(e.target);
-			// Get the BootstrapValidator instance
-			var bv = $form.data('bootstrapValidator');
-			// Use Ajax to submit form data
-			$.post($form.attr('action'), $form.serialize(), function(result) {
-				console.log(result);
-			}, 'json')
-		});
-	});
-</script>
-
+<!--requireJs  -->
+<script data-main="static/app/js/main" src="static/base/js/require.js"   ></script>
 </html>

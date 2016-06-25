@@ -9,7 +9,6 @@ app.controller("MainCtrl", function($scope, $http) {
 				info : $scope.info
 			},
 		}).success(function(data) {
-			console.log(data)
 			$scope.$broadcast('getLucenBlogs', data);
 		})
 	};
@@ -24,7 +23,6 @@ app.controller("BlogCtrl", function($scope, $http) {
 			url : 'blog/articles/type/' + id + '?pageNum=1&pageSize=5',
 			method : 'GET'
 		}).success(function(data) {
-			console.log(data)
 			$scope.blogs = data.page.results;
 			$scope.getPage(data.page);
 		}).error(function(data) {
@@ -35,7 +33,6 @@ app.controller("BlogCtrl", function($scope, $http) {
 		url : 'blog/articles',
 		method : 'GET'
 	}).success(function(data) {
-		console.log(data)
 		$scope.blogs = data.page.results;
 		$scope.getPage(data.page, $scope, $http);
 	}).error(function(data) {
@@ -45,7 +42,6 @@ app.controller("BlogCtrl", function($scope, $http) {
 		url : 'blogType/all',
 		method : 'GET'
 	}).success(function(data) {
-		console.log(data)
 		$scope.types = data.results;
 	}).error(function(data) {
 		alert(data.msg)
@@ -53,7 +49,6 @@ app.controller("BlogCtrl", function($scope, $http) {
 
 	// 生成分页控件
 	$scope.getPage = function(page) {
-		console.log(page)
 		kkpager.generPageHtml({
 			pno : page.pageNum,
 			mode : 'click',
@@ -66,7 +61,6 @@ app.controller("BlogCtrl", function($scope, $http) {
 					url : 'blog/articles?pageNum=' + n,
 					method : 'GET'
 				}).success(function(data) {
-					console.log(data)
 					$scope.blogs = data.page.results;
 				}).error(function(data) {
 					alert(data.msg)
