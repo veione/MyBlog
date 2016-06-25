@@ -21,6 +21,7 @@ import com.google.code.kaptcha.Producer;
 import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
 import com.java.blog.entity.Blog;
 import com.java.blog.exception.ParamException;
+import com.java.blog.page.ParamPage;
 import com.java.blog.service.BlogService;
 
 import io.swagger.annotations.ApiOperation;
@@ -42,7 +43,7 @@ public class CommonController {
 	@ApiOperation(value = "测试下载Excel", notes = "", response = Blog.class)
 	@RequestMapping(value = "/excel")
 	public String excel(ModelMap map) throws ParamException, IOException {
-		PageInfo<Blog> pageInfo = this.blogService.findByPage(1, 5);
+		PageInfo<Blog> pageInfo = this.blogService.findByPage(new ParamPage());
 		map.put(NormalExcelConstants.FILE_NAME, "我的博客");
 		map.put(NormalExcelConstants.CLASS, Blog.class);
 		map.put(NormalExcelConstants.PARAMS, new ExportParams("标题", "表明"));

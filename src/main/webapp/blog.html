@@ -22,10 +22,10 @@
 <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/bootstrapValidator.min.js" type="text/javascript"
 	charset="utf-8"></script>
-<body ng-app="myApp" style="padding: 50px;">
+<body ng-app="myApp" style="padding: 50px;" ng-controller="MainCtrl">
 		<header>
 			<nav class="navbar navbar-inverse navbar-fixed-top">
-				<div class="container">
+				<div class="container" >
 					<div class="navbar-header">
 						<button type="button" class="collapsed navbar-toggle"
 							data-toggle="collapse" data-target="#taoyu">
@@ -58,7 +58,7 @@
 				</div>
 			</nav>
 		</header>
-	<div class="container" ng-controller="myCtrl">
+	<div class="container" ng-controller="BlogCtrl">
 		<div class="middele">
 			<div class="row">
 			<div class="col-md-10 ">
@@ -71,8 +71,8 @@
 				<div id="kkpager"></div>
 			</div>
 			<div class="col-md-2">
-				<ul class="list-group" >
-					<li class="list-group-item list-group-item-info" ng-repeat="type in types"><a href="javascript:void(0);" ng-click="findByType(type.id)">{{type.name}}</a></li>
+				<ul class="nav nav-pills" >
+					<li class="" ng-repeat="type in types"><a href="javascript:void(0);" ng-click="findByType(type.id)">{{type.name}}</a></li>
 				</ul>
 			</div>
 		</div>

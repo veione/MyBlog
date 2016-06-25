@@ -1,19 +1,27 @@
-angular.module("myApp", []).controller("myCtrl", function($scope, $http) {
+var app = angular.module("myApp", []);
+// 头部相关
+app.controller("MainCtrl", function($scope, $http) {
 	$scope.searchBlog = function() {
 		$.ajax({
 			method : 'POST',
-			url : 'blog/getBlog',
+			url : 'blog/search',
 			data : {
 				info : $scope.info
 			},
 		}).success(function(data) {
 			console.log(data)
-			$scope.blogs = data.results;
+			$scope.$broadcast('getLucenBlogs', data);
 		})
 	};
+});
+// 中间
+app.controller("BlogCtrl", function($scope, $http) {
+	$scope.$on('getLucenBlogs', function(e, data) {
+		$scope.blogs = data.results;
+	});
 	$scope.findByType = function(id) {
 		$http({
-			url : 'blog/articles/type/'+id+'?pageNum=1&pageSize=5',
+			url : 'blog/articles/type/' + id + '?pageNum=1&pageSize=5',
 			method : 'GET'
 		}).success(function(data) {
 			console.log(data)
@@ -24,7 +32,7 @@ angular.module("myApp", []).controller("myCtrl", function($scope, $http) {
 		});
 	};
 	$http({
-		url : 'blog/articles?pageNum=1&pageSize=5',
+		url : 'blog/articles',
 		method : 'GET'
 	}).success(function(data) {
 		console.log(data)
@@ -42,20 +50,20 @@ angular.module("myApp", []).controller("myCtrl", function($scope, $http) {
 	}).error(function(data) {
 		alert(data.msg)
 	});
-	
-	//生成分页控件
-	$scope.getPage=function (page) {
+
+	// 生成分页控件
+	$scope.getPage = function(page) {
 		console.log(page)
 		kkpager.generPageHtml({
 			pno : page.pageNum,
 			mode : 'click',
-			//总页码  
+			// 总页码
 			total : page.totalPage,
-			//总数据条数  
+			// 总数据条数
 			totalRecords : page.totalRecords,
 			click : function(n) {
 				$http({
-					url : 'blog/articles?pageNum=' + n + '&pageSize=5',
+					url : 'blog/articles?pageNum=' + n,
 					method : 'GET'
 				}).success(function(data) {
 					console.log(data)
@@ -65,6 +73,6 @@ angular.module("myApp", []).controller("myCtrl", function($scope, $http) {
 				});
 				this.selectPage(n);
 			}
-		},true);
+		}, true);
 	}
 });

@@ -10,7 +10,6 @@ import java.util.List;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
@@ -40,12 +39,14 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 import com.java.blog.entity.Blog;
+import com.java.blog.entity.LuceneBlog;
 import com.java.blog.exception.DocException;
 import com.java.blog.exception.IndexWriterCloseException;
 
 import lombok.extern.log4j.Log4j;
 
-/**@author TaoYu
+/**
+ * @author TaoYu
  * @Description LUCENE工具类，不支持并发(后面会改成按登录用户写地址，写入对应的路径，即可支持多人操作)
  */
 @Log4j
@@ -65,7 +66,8 @@ public class LuceneUtil {
 		}
 	}
 
-	/**@Describe：得到写索引实例
+	/**
+	 * @Describe：得到写索引实例
 	 */
 	private static IndexWriter getWriter() {
 		IndexWriter writer = null;
@@ -78,17 +80,22 @@ public class LuceneUtil {
 		return writer;
 	}
 
-	/**@Describe：添加索引
+	/**
+	 * @Describe：添加索引
 	 */
-	public static void addIndex(Blog blog) throws IndexWriterCloseException, DocException {
+	public static void addIndex(List<Blog> blogs) throws IndexWriterCloseException, DocException {
 		IndexWriter writer = getWriter();
 		try {
-			Document doc = new Document();
-			doc.add(new IntField("id", blog.getId(), Store.YES));
-			doc.add(new TextField("title", blog.getTitle(), Store.YES));
-			doc.add(new StringField("releaseDate", DateFormatUtils.format(new Date(), "yyyy-MM-dd"), Store.NO));
-			doc.add(new TextField("content", blog.getContent(), Store.YES));
-			writer.addDocument(doc);
+			for (Blog blog : blogs) {
+				Document doc = new Document();
+				doc.add(new IntField("id", blog.getId(), Store.YES));
+				doc.add(new StringField("title", blog.getTitle(), Store.YES));
+				doc.add(new StringField("releaseDate", DateFormatUtils.format(blog.getReleaseDate(), "yyyy-MM-dd"),
+						Store.YES));
+				doc.add(new TextField("content", blog.getContent(), Store.YES));
+				writer.addDocument(doc);
+			}
+
 		} catch (IOException e) {
 			throw new DocException("添加文档异常");
 		} finally {
@@ -98,7 +105,8 @@ public class LuceneUtil {
 
 	}
 
-	/**@Describe：关闭写索引流
+	/**
+	 * @Describe：关闭写索引流
 	 */
 	private static void closeWriter(IndexWriter writer) throws IndexWriterCloseException {
 		try {
@@ -109,15 +117,16 @@ public class LuceneUtil {
 
 	}
 
-	/**@Describe：更新索引
+	/**
+	 * @Describe：更新索引
 	 */
 	public void updateIndex(Blog blog) throws DocException, IndexWriterCloseException {
 		IndexWriter writer = getWriter();
 		try {
 			Document doc = new Document();
-			doc.add(new StringField("id", String.valueOf(blog.getId()), Store.YES));
-			doc.add(new TextField("title", blog.getTitle(), Store.YES));
-			doc.add(new StringField("releaseDate", DateFormatUtils.format(new Date(), "yyyy-MM-dd"), Store.NO));
+			doc.add(new IntField("id", blog.getId(), Store.YES));
+			doc.add(new StringField("title", blog.getTitle(), Store.YES));
+			doc.add(new StringField("releaseDate", new Date().toString(), Store.NO));
 			doc.add(new TextField("content", blog.getContent(), Store.YES));
 			writer.updateDocument(new Term("id", String.valueOf(blog.getId())), doc);
 		} catch (IOException e) {
@@ -128,8 +137,9 @@ public class LuceneUtil {
 
 	}
 
-	/**@throws IndexWriterCloseException 
-	 * @throws DocException 
+	/**
+	 * @throws IndexWriterCloseException
+	 * @throws DocException
 	 * @Describe：删除索引
 	 */
 	public void deleteIndex(String blogId) throws IndexWriterCloseException, DocException {
@@ -145,13 +155,13 @@ public class LuceneUtil {
 		}
 	}
 
-	/**@Describe：查询索引博客（里面一些可以抽出来，为了流程完整暂不处理）
-	 * @Date： 2016年6月16日下午9:45:35
+	/**
+	 * @Describe：查询索引博客（里面一些可以抽出来，为了流程完整暂不处理） @Date： 2016年6月16日下午9:45:35
 	 * @param param
 	 * @return
 	 * @throws Exception
 	 */
-	public static List<Blog> searchBlog(String param, Integer nums) throws Exception {
+	public static List<LuceneBlog> searchBlog(String param, Integer nums) throws Exception {
 		// 1打开度索引流
 		IndexReader reader = DirectoryReader.open(dir);
 		IndexSearcher is = new IndexSearcher(reader);
@@ -170,14 +180,14 @@ public class LuceneUtil {
 		Highlighter highlighter = new Highlighter(simpleHTMLFormatter, scorer);
 		highlighter.setTextFragmenter(fragmenter);
 		// 4初始化返回的集合，并通过条件查询搜索得到命中的文档
-		List<Blog> blogList = new LinkedList<Blog>();
+		List<LuceneBlog> blogList = new LinkedList<LuceneBlog>();
 		TopDocs hits = is.search(booleanQuery.build(), nums);
 		// 5遍历命中的文档
 		for (ScoreDoc scoreDoc : hits.scoreDocs) {
-			Blog blog = new Blog();
+			LuceneBlog blog = new LuceneBlog();
 			Document doc = is.doc(scoreDoc.doc);// 什么鬼设计（显示的调用ID，不友好差评）
 			blog.setId(Integer.parseInt(doc.get(("id"))));
-			blog.setReleaseDate(DateUtils.parseDate(doc.get(("releaseDate")), "yyyy-MM-dd"));
+			blog.setReleaseDate(doc.get("releaseDate"));
 			String title = doc.get("title");
 			String content = StringEscapeUtils.escapeHtml(doc.get("content").substring(0, 100));
 			// 设置返回标题高亮

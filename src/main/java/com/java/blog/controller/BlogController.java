@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
 import com.java.blog.entity.Blog;
+import com.java.blog.entity.LuceneBlog;
 import com.java.blog.exception.DocException;
 import com.java.blog.exception.IndexWriterCloseException;
 import com.java.blog.exception.ParamException;
+import com.java.blog.page.ParamPage;
 import com.java.blog.service.BlogService;
 import com.java.blog.utils.LuceneUtil;
 import com.java.blog.utils.ResponseJson;
@@ -32,15 +34,15 @@ public class BlogController {
 
 	@ApiOperation(value = "博客首页", notes = "分页查找带缓存打开@Cacheable", response = Blog.class)
 	@RequestMapping(value = "/articles", method = RequestMethod.GET)
-	public ResponseJson articles(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize)
+	public ResponseJson articles(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+			@RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize)
 			throws ParamException {
 		ResponseJson json = new ResponseJson();
-		PageInfo<Blog> pageInfo = this.blogService.findByPage(pageNum, pageSize);
+		ParamPage paramPage = new ParamPage(pageNum, pageSize);
+		PageInfo<Blog> pageInfo = this.blogService.findByPage(paramPage);
 		json.setPage(pageInfo);
 		return json;
 	}
-
-
 
 	@ApiOperation(value = "根据类型查找", notes = "分页查找", response = Blog.class)
 	@RequestMapping(value = "/articles/type/{id}", method = RequestMethod.GET)
@@ -56,7 +58,7 @@ public class BlogController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public ResponseJson search(@RequestParam String info) throws Exception {
 		ResponseJson json = new ResponseJson();
-		List<Blog> blogs = LuceneUtil.searchBlog(info, 100);
+		List<LuceneBlog> blogs = LuceneUtil.searchBlog(info, 100);
 		json.setResults(blogs);
 		return json;
 	}
@@ -67,9 +69,7 @@ public class BlogController {
 	public ResponseJson writeIndex() throws IndexWriterCloseException, DocException {
 		ResponseJson json = new ResponseJson();
 		List<Blog> lists = this.blogService.selectList(new Blog());
-		for (Blog blog : lists) {
-			LuceneUtil.addIndex(blog);
-		}
+		LuceneUtil.addIndex(lists);
 		return json;
 	}
 }
