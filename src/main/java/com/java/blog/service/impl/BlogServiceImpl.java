@@ -32,10 +32,12 @@ public class BlogServiceImpl extends SuperServiceImpl<BlogDao, Blog> implements 
 	}
 
 	@Override
-	public PageInfo<Blog> findByPageAndType(Integer pageNum, Integer pageSize, Integer id) {
-		PageHelper.startPage(pageNum, pageSize);
+	public PageInfo<Blog> findByPageAndType(ParamPage paramPage, Integer id) {
+		PageHelper.startPage(paramPage.getPageNum(), paramPage.getPageSize());
 		Blog blog = new Blog();
-		blog.setTypeId(id);
+		if (id != -1) {
+			blog.setTypeId(id);
+		}
 		List<Blog> list = blogDao.selectList(new EntityWrapper<Blog>(blog));
 		PageInfo<Blog> pageInfo = new PageInfo<>(list);
 		return pageInfo;

@@ -1,4 +1,4 @@
-var app = angular.module("myApp", []);
+var app = angular.module("app", []);
 // 头部相关
 app.controller("MainCtrl", function($scope, $http) {
 	$scope.searchBlog = function() {
@@ -15,12 +15,13 @@ app.controller("MainCtrl", function($scope, $http) {
 });
 // 中间
 app.controller("BlogCtrl", function($scope, $http) {
+	$scope.showSearch=false;
 	$scope.$on('getLucenBlogs', function(e, data) {
 		$scope.blogs = data.results;
 	});
 	$scope.findByType = function(id) {
 		$http({
-			url : 'blog/articles/type/' + id + '?pageNum=1&pageSize=5',
+			url : 'blog/articles/type/' + id + '?pageNum=1',
 			method : 'GET'
 		}).success(function(data) {
 			$scope.blogs = data.page.results;
@@ -34,7 +35,7 @@ app.controller("BlogCtrl", function($scope, $http) {
 		method : 'GET'
 	}).success(function(data) {
 		$scope.blogs = data.page.results;
-		$scope.getPage(data.page, $scope, $http);
+		$scope.getPage(data.page);
 	}).error(function(data) {
 		alert(data.msg)
 	});

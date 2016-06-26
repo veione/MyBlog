@@ -1,0 +1,23 @@
+<div class="container" ng-controller="BlogCtrl">
+		<div class="middele">
+			<div class="row">
+				<div class="col-md-10 ">
+					<ul class="list-group" ng-repeat="blog in blogs">
+						<li class="list-group-item"><a href="" ng-bind="blog.title"></a></li>
+						<li class="list-group-item"><span ng-bind="blog.summary"></span></li>
+						<li class="list-group-item"><mark>发布于：</mark ><span ng-bind="blog.releaseDate"></span><small>阅读（
+								<span ng-bind="blog.clickHit"></span> ） 评论（<span ng-bind="blog.replyHit"></span>）</small></li>
+					</ul>
+					<div id="kkpager"></div>
+				</div>
+				<div class="col-md-2">
+				<h4 class="page-header ">主题</h4>
+					<ul class="nav nav-pills">
+					<li ><a href="javascript:void(0);" ng-click="findByType(-1)">全部</a></li>
+						<li class="" ng-repeat="type in types"><a
+							href="javascript:void(0);" ng-click="findByType(type.id)"  ng-bind="type.name"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>

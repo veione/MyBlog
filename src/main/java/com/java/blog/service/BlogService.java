@@ -10,7 +10,7 @@ public interface BlogService extends ISuperService<Blog>  {
 
 	PageInfo<Blog> findByPage(ParamPage paramPage);
 
-	PageInfo<Blog> findByPageAndType(Integer pageNum, Integer pageSize, Integer id);
+	PageInfo<Blog> findByPageAndType(ParamPage paramPage, Integer id);
 	
 
 }

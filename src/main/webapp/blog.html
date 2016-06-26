@@ -31,7 +31,7 @@
 						<li><a href="">心情</a></li>
 						<li><a href="">个人介绍</a></li>
 					</ul>
-					<form class="navbar-form navbar-left hidden-xs" role="search">
+					<form class="navbar-form navbar-left hidden-xs" role="search" ng-show="showSearch">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="全文检索"
 								ng-model="info" />
@@ -50,28 +50,7 @@
 			</div>
 		</nav>
 	</header>
-	<div class="container" ng-controller="BlogCtrl">
-		<div class="middele">
-			<div class="row">
-				<div class="col-md-10 ">
-					<ul class="list-group" ng-repeat="blog in blogs">
-						<li class="list-group-item"><a href="" ng-bind="blog.title"></a></li>
-						<li class="list-group-item"><span ng-bind="blog.summary"></span></li>
-						<li class="list-group-item"><mark>发布于：</mark ><span ng-bind="blog.releaseDate"></span><small>阅读（
-								<span ng-bind="blog.clickHit"></span> ） 评论（<span ng-bind="blog.replyHit"></span>）</small></li>
-					</ul>
-					<div id="kkpager"></div>
-				</div>
-				<div class="col-md-2">
-					<ul class="nav nav-pills">
-						<li class="" ng-repeat="type in types"><a
-							href="javascript:void(0);" ng-click="findByType(type.id)"  ng-bind="type.name"></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 <!--requireJs  -->
-<script data-main="static/app/js/main" src="static/base/js/require.js"   ></script>
+<!-- <script data-main="static/main" src="static/base/js/require.js"   ></script> -->
 </html>

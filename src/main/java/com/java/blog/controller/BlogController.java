@@ -46,10 +46,13 @@ public class BlogController {
 
 	@ApiOperation(value = "根据类型查找", notes = "分页查找", response = Blog.class)
 	@RequestMapping(value = "/articles/type/{id}", method = RequestMethod.GET)
-	public ResponseJson articlesByType(@PathVariable("id") Integer id, @RequestParam("pageNum") Integer pageNum,
-			@RequestParam("pageSize") Integer pageSize) throws ParamException {
+	public ResponseJson articlesByType(@PathVariable("id") Integer id,
+			@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+			@RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize)
+			throws ParamException {
 		ResponseJson json = new ResponseJson();
-		PageInfo<Blog> pageInfo = this.blogService.findByPageAndType(pageNum, pageSize, id);
+		ParamPage paramPage = new ParamPage(pageNum, pageSize);
+		PageInfo<Blog> pageInfo = this.blogService.findByPageAndType(paramPage, id);
 		json.setPage(pageInfo);
 		return json;
 	}
