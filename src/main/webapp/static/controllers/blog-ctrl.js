@@ -47,6 +47,7 @@ define(['angular','kkpager'], function (angular,kkpager) {
     					url : 'blog/articles?pageNum=' + n,
     					method : 'GET'
     				}).success(function(data) {
+    					console.log(data)
     					$scope.blogs = data.page.results;
     				}).error(function(data) {
     					alert(data.msg)

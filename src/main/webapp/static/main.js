@@ -13,31 +13,27 @@ require.config({
 		"bootstrapValidator" : "base/js/bootstrapValidator.min",
 		"kkpager" : "base/js/kkpager.min",
 		"html5" : "base/js/html5shiv",
-	/* 本地加载自己的 */
-	/*
-	 * "blog" : "app/model_blog/blog", "myValidator" :
-	 * "app/model_index/myValidator"
-	 */
 	},
-	/* 定义依赖保证加载顺序 */
+	/* 定义依赖保证加载顺序,angularJs依赖于jquery是为了升级内部jqLite */
 	shim : {
 		'bootstrap' : [ 'jquery' ],
 		'bootstrapValidator' : [ 'bootstrap' ],
-		'kkpager' :{
-            deps: ['jquery'],
-            exports: 'kkpager'
-        },
+		'kkpager' : {
+			deps : [ 'jquery' ],
+			exports : 'kkpager'
+		},
 		'angular' : {
+			deps : [ 'jquery' ],
 			exports : 'angular'
 		},
-		'angular-route': {
-            deps: ['angular'],
-            exports: 'ngRoute'
-        }
+		'angular-route' : {
+			deps : [ 'angular' ],
+			exports : 'ngRoute'
+		}
 	}
 });
- require(['angular','router'], function(angular,router){
-	 require(['domReady!'],function(){
-		 angular.bootstrap(document, ['blogApp']);
-	 });
-    });
+require([ 'angular', 'router' ], function(angular, router) {
+	require([ 'domReady!' ], function() {
+		angular.bootstrap(document, [ 'blogApp' ]);
+	});
+});

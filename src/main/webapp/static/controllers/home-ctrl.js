@@ -1,4 +1,4 @@
-define(['angular','jquery'], function (angular,$) {
+define(['angular',"bootstrap"], function (angular,$) {
     return function ListCtrl( $scope, $http ){
     	$scope.searchBlog = function() {
     		$.ajax({
