@@ -23,7 +23,7 @@ public class BlogServiceImpl extends SuperServiceImpl<BlogDao, Blog> implements 
 	private BlogDao blogDao;
 
 	@Override
-	@Cacheable(cacheNames = "blog", key = "#paramPage")
+	/*@Cacheable(cacheNames = "blog", key = "#paramPage")*/
 	public PageInfo<Blog> findByPage(ParamPage paramPage) {
 		PageHelper.startPage(paramPage.getPageNum(), paramPage.getPageSize());
 		List<Blog> list = blogDao.selectList(new EntityWrapper<Blog>(null));

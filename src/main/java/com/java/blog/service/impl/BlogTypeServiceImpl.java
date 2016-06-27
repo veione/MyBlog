@@ -18,14 +18,15 @@ public class BlogTypeServiceImpl extends SuperServiceImpl<BlogTypeDao, BlogType>
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BlogType> getAllBlogTypes() {
-		String redisTypes = RedisUtils.get("blogTypes");
+	/*	String redisTypes = RedisUtils.get("blogTypes");
 		if (redisTypes != null) {
 			return (List<BlogType>) JSON.parse(redisTypes);
 		} else {
 			List<BlogType> typesReal = this.selectList(new BlogType());
 			RedisUtils.set("blogTypes", JSON.toJSONString(typesReal));
 			return typesReal;
-		}
+		}*/
+		return  this.selectList(new BlogType());
 	}
 
 }
