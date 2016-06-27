@@ -27,7 +27,7 @@ public class BlogType implements Serializable {
 	@ApiModelProperty("主键")
 	private Integer id;
 
-	@ApiModelProperty("博客类型名称键")
+	@ApiModelProperty("博客类型名称")
 	private String name;
 
 	@ApiModelProperty("排序")

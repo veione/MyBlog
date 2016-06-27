@@ -1,6 +1,5 @@
 define(['angular','kkpager'], function (angular,kkpager) {
     return function BlogCtrl( $scope, $http ){
-       	$scope.showSearch=false;
     	$scope.$on('getLucenBlogs', function(e, data) {
     		$scope.blogs = data.results;
     	});

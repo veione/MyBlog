@@ -1,7 +1,7 @@
 package com.java.blog.service;
 
-import com.java.blog.entity.Comment;
 import com.baomidou.framework.service.ISuperService;
+import com.java.blog.entity.Comment;
 
 /**
  *

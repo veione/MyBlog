@@ -1,26 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.java.blog.dao.BlogDao">
-	<!-- 通用查询结果列 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.blog.mapper.BlogMapper">
+
+	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, title, summary, releaseDate, clickHit, replyHit, content, typeId,keyWord
+		 id, title, summary, releaseDate, clickHit, replyHit, content, typeId, keyWord
 	</sql>
-	
-	<resultMap type="com.java.blog.entity.Blog" id="BlogResult">
-		<result property="id" column="id" />
-		<result property="title" column="title" />
-		<result property="summary" column="summary" />
-		<result property="releaseDate" column="releaseDate" />
-		<result property="clickHit" column="clickHit" />
-		<result property="replyHit" column="replyHit" />
-		<result property="content" column="content" />
-		<result property="keyWord" column="keyWord" />
-		<association property="blogType" column="typeId"
-			select="com.java.blog.dao.BlogTypeDao.findById"></association>
-	</resultMap>
 
-
-	
-</mapper> 
+</mapper>

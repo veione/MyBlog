@@ -3,26 +3,37 @@ package com.java.blog.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotations.IdType;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 
-import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@ApiModel("评论")
+@TableName(value = "comment")
 public class Comment implements Serializable {
 
-	private static final long serialVersionUID = 263673981856247655L;
+	@TableField(exist = false)
+	private static final long serialVersionUID = 1L;
 
-	private Integer id; // 编号
+	@TableId(type = IdType.AUTO)
+	private Integer id;
 
-	private String userIp; // 用户IP
+	private String userIp;
 
-	private String content; // 评论内容
+	private Integer blogId;
 
-	private Blog blog; // 被评论的博客
+	private String content;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date commentDate; // 评论日期
+	private Date commentDate;
 
-	private Integer state; // 审核状态 0 待审核 1 审核通过 2 审核未通过
+	private Integer state;
 
 }
