@@ -9,6 +9,7 @@ require.config({
 				"base/js/angular-route.min" ],
 		"uiRouter" : "base/js/angular-ui-route.min",
 		"jquery" : "base/js/jquery-2.2.4.min",
+		"jqueryForm" : "base/js/jquery.form",
 		"bootstrap" : "base/js/bootstrap.min",
 		"bootstrapValidator" : "base/js/bootstrapValidator.min",
 		"kkpager" : "base/js/kkpager.min",
