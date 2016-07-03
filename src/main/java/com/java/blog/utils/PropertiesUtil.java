@@ -6,7 +6,8 @@ import java.util.Properties;
 
 import lombok.extern.log4j.Log4j;
 
-/**@author TaoYu
+/**
+ * @author TaoYu
  * @Description 配置文件工具类
  */
 @Log4j
