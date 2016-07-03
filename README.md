@@ -20,13 +20,12 @@
 * `shiro`：权限管理。  还没开始用哦，等我看完开涛哥的博客
 * `验证码`：kcaptcha 比较老的验证码生成工具了
 * `Excel导出`：easypoi 开源中国下比较火的poi工具，方便快捷
-
  
 ##前端
 * `基本布局`：Bootstrap
 * `前台`：AngularJs+路由  `后台`：EasyUi
-* `requireJs`：按需引入包
-* `jquey`：2.x 
+* `包加载`：requireJs按需引入包
+* `jquey`：jquey2.x 
 * `兼容html5`：html5shiv
 * `表单验证`：bootstrapValidator
 * `分页`：kkPager
